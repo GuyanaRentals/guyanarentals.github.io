@@ -1,0 +1,53 @@
+{
+  "properties": [
+    {
+      "id": 1,
+      "title": "Modern Apartment in Georgetown",
+      "price": 1200,
+      "location": "Georgetown",
+      "description": "Spacious 2 bedroom apartment with modern amenities and great city views.",
+      "image": "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+      "bedrooms": 2,
+      "bathrooms": 2
+    },
+    {
+      "id": 2,
+      "title": "Cozy Family Home",
+      "price": 850,
+      "location": "Linden",
+      "description": "Perfect for families, this home features a large yard and recently renovated interior.",
+      "image": "https://images.unsplash.com/photo-1574362848149-11496d93a7c7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=784&q=80",
+      "bedrooms": 3,
+      "bathrooms": 1
+    },
+    {
+      "id": 1755915432514,
+      "title": "Fully Furnished Apartment Including AC Unit",
+      "price": "500",
+      "location": "Enmore East Coast Demerara",
+      "description": "Contact 634 5559 ",
+      "image": "file:///C:/Users/Pablo/Downloads/530806931_1195044802388555_343186577652650674_n.jpg",
+      "bedrooms": "",
+      "bathrooms": ""
+    },
+    {
+      "id": 1755915557050,
+      "title": "One Bedroom Apartment",
+      "price": "250",
+      "location": "Lot 211 Section D, Non Pariel, ECD (Using Cinema Rd going towards the seawall)",
+      "description": "Price: GYD $55,000 / USD$250 per month. \nFeatures: Free WiFi, Free water from overhead tank, Free garbage disposal, Electricity via a pre-paid meter, Indoor & outdoor parking available, close proximity to health center, supermarkets, schools, taxi service and all the other basic amenities. \nViewing is by appointment Only. \nCall #641-4511 for further details.",
+      "image": "https://scontent.fogl1-1.fna.fbcdn.net/v/t39.30808-6/517368823_24725643420355799_4842333267558998206_n.jpg?stp=dst-jpg_p526x296_tt6&_nc_cat=102&cb=99be929b-fc739e1c&ccb=1-7&_nc_sid=aa7b47&_nc_ohc=4WDNER6DcdcQ7kNvwGP7Cbr&_nc_oc=Adn6XaETuIAQJMZariFeV3-qPRL_hHmbX2h1W5F65RwkS2aAY8ldwg4ZHN7dxV0HuIY&_nc_zt=23&_nc_ht=scontent.fogl1-1.fna&_nc_gid=_ztNFFMkNx0YCqAMljuq5A&oh=00_AfU0Q53ofEoLiH6a0dFmwLWW1u-40pFNuLLDNr_E0wh7ZQ&oe=68AEEDA3&_nc_ee=1",
+      "bedrooms": "1",
+      "bathrooms": ""
+    }
+  ],
+  "advertisements": [
+    {
+      "id": 1755915671690,
+      "name": "Courts Guyana",
+      "image": "https://www.courts.com/media/catalog/product/d/g/dgt0a8.jpg?optimize=medium&bg-color=255,255,255&fit=bounds&height=1000&width=1000&canvas=1000:1000",
+      "link": "https://www.courts.com/guyana/furniture-of-america-dining-set-square-4-chairs-lubbock-fm3419wn-pt-5pk-dgt0a8/p",
+      "description": "Furniture of America Dining set Square 4 chairs - GY$99,999"
+    }
+  ]
+}
