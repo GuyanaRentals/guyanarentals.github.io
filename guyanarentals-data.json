@@ -2,20 +2,20 @@
   "properties": [
     {
       "id": 1,
-      "title": "Modern Apartment in Georgetown",
-      "price": 1200,
-      "location": "Georgetown",
-      "description": "Spacious 2 bedroom apartment with modern amenities and great city views.",
+      "title": "Three (3) Bedroom Apartment",
+      "price": 70000,
+      "location": "Anna Catherina, W.C.D",
+      "description": "Spacious 3 bedroom apartment with modern amenities and great city views.",
       "image": "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
-      "bedrooms": 2,
-      "bathrooms": 2
+      "bedrooms": 3,
+      "bathrooms": 1
     },
     {
       "id": 2,
-      "title": "Cozy Family Home",
-      "price": 850,
-      "location": "Linden",
-      "description": "Perfect for families, this home features a large yard and recently renovated interior.",
+      "title": "1 Bedroom Tiny Apartment",
+      "price": 30000,
+      "location": "Groendveldt, Leonora W.C.D",
+      "description": "Perfect persons on a budget.",
       "image": "https://images.unsplash.com/photo-1574362848149-11496d93a7c7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=784&q=80",
       "bedrooms": 3,
       "bathrooms": 1
