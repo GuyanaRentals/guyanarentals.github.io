@@ -621,8 +621,8 @@
 
         // Load property data function
         function loadPropertyData() {
-            // Replace with the actual path to your exported JSON file
-            fetch('guyanarentals-data.json')
+            // FIXED: Changed filename to match your actual JSON file
+            fetch('properties.json')
                 .then(response => response.json())
                 .then(data => {
                     // Process and display your properties
