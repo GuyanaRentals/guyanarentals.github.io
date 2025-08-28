@@ -1,384 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GuyanaRentals - With Clickable Ads</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        :root {
-            --primary: #006837;
-            --secondary: #F9A825;
-            --light: #f8f9fa;
-            --dark: #343a40;
-            --gray: #6c757d;
-        }
-        
-        body {
-            background-color: #f5f5f5;
-            color: #333;
-            line-height: 1.6;
-        }
-        
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
-        
-        /* Header Styles */
-        header {
-            background-color: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-        }
-        
-        .logo h1 {
-            color: var(--primary);
-            font-size: 24px;
-        }
-        
-        .logo span {
-            color: var(--secondary);
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-        
-        nav ul li {
-            margin-left: 20px;
-        }
-        
-        nav ul li a {
-            text-decoration: none;
-            color: var(--dark);
-            font-weight: 500;
-            transition: all 0.3s;
-            padding: 8px 15px;
-            border-radius: 4px;
-        }
-        
-        nav ul li a:hover {
-            color: var(--primary);
-            background-color: rgba(0, 104, 55, 0.1);
-        }
-        
-        nav ul li a.active {
-            color: var(--primary);
-            background-color: rgba(0, 104, 55, 0.1);
-        }
-        
-        nav ul li a.list-property {
-            background-color: var(--primary);
-            color: white;
-        }
-        
-        nav ul li a.list-property:hover {
-            background-color: #005126;
-        }
-        
-        nav ul li a.advertise {
-            background-color: var(--secondary);
-            color: white;
-        }
-        
-        nav ul li a.advertise:hover {
-            background-color: #e59700;
-        }
-        
-        /* Ad Spaces */
-        .ad-container {
-            width: 100%;
-            margin: 20px 0;
-            text-align: center;
-        }
-        
-        .ad-label {
-            font-size: 12px;
-            color: var(--gray);
-            text-transform: uppercase;
-            margin-bottom: 5px;
-        }
-        
-        .ad-banner {
-            display: block;
-            width: 100%;
-            max-width: 728px;
-            height: 90px;
-            margin: 0 auto;
-            background: linear-gradient(135deg, #f6f9fc 0%, #e9eff5 100%);
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            overflow: hidden;
-            transition: transform 0.3s, box-shadow 0.3s;
-            text-decoration: none;
-            color: inherit;
-        }
-        
-        .ad-banner:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .ad-content {
-            display: flex;
-            align-items: center;
-            height: 100%;
-            padding: 0 20px;
-        }
-        
-        .ad-image {
-            height: 60px;
-            width: 60px;
-            object-fit: contain;
-            margin-right: 15px;
-            border-radius: 6px;
-        }
-        
-        .ad-text {
-            flex: 1;
-            text-align: left;
-        }
-        
-        .ad-title {
-            font-weight: 600;
-            color: var(--primary);
-            margin-bottom: 5px;
-        }
-        
-        .ad-description {
-            font-size: 14px;
-            color: var(--dark);
-        }
-        
-        .ad-cta {
-            background-color: var(--secondary);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 500;
-        }
-        
-        /* Properties Grid */
-        .properties-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
-            margin: 30px 0;
-        }
-        
-        .property-card {
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
-        }
-        
-        .property-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .property-image {
-            height: 200px;
-            overflow: hidden;
-        }
-        
-        .property-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .property-details {
-            padding: 20px;
-        }
-        
-        .property-details h3 {
-            margin-bottom: 10px;
-            color: var(--dark);
-        }
-        
-        .property-price {
-            color: var(--primary);
-            font-weight: bold;
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-        }
-
-        /* Contact Modal */
-        #contactModal {
-            display: none; 
-            position: fixed; 
-            top: 0; left: 0; 
-            width: 100%; height: 100%; 
-            background: rgba(0,0,0,0.5); 
-            justify-content: center; 
-            align-items: center;
-        }
-        #contactModal .modal-content {
-            background: white; 
-            padding: 20px; 
-            border-radius: 10px; 
-            text-align: center; 
-            max-width: 400px;
-        }
-        #contactModal button {
-            margin-top: 10px; 
-            padding: 8px 16px; 
-            background: #006837; 
-            color: white; 
-            border: none; 
-            border-radius: 6px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GuyanaRentals - With Clickable Ads</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    :root { --primary: #006837; --secondary: #F9A825; --light: #f8f9fa; --dark: #343a40; --gray: #6c757d; }
+    body { background-color: #f5f5f5; color: #333; line-height: 1.6; }
+    .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 15px; }
+    header { background-color: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
+    .header-container { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; }
+    .logo h1 { color: var(--primary); font-size: 24px; } .logo span { color: var(--secondary); }
+    nav ul { display: flex; list-style: none; } nav ul li { margin-left: 20px; }
+    nav ul li a { text-decoration: none; color: var(--dark); font-weight: 500; transition: all 0.3s; padding: 8px 15px; border-radius: 4px; }
+    nav ul li a:hover { color: var(--primary); background-color: rgba(0,104,55,0.1); }
+    nav ul li a.active { color: var(--primary); background-color: rgba(0,104,55,0.1); }
+    nav ul li a.list-property { background-color: var(--primary); color: white; }
+    nav ul li a.list-property:hover { background-color: #005126; }
+    nav ul li a.advertise { background-color: var(--secondary); color: white; }
+    nav ul li a.advertise:hover { background-color: #e59700; }
+    .ad-container { width: 100%; margin: 20px 0; text-align: center; }
+    .ad-label { font-size: 12px; color: var(--gray); text-transform: uppercase; margin-bottom: 5px; }
+    .ad-banner { display: block; width: 100%; max-width: 728px; margin: 0 auto; background: linear-gradient(135deg,#f6f9fc 0%,#e9eff5 100%); border: 1px solid #ddd; border-radius: 8px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; text-decoration: none; color: inherit; }
+    .ad-banner:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+    .ad-content { display: flex; align-items: center; height: 100%; padding: 0 20px; }
+    .ad-image { height: 60px; width: 60px; object-fit: contain; margin-right: 15px; border-radius: 6px; }
+    .ad-text { flex: 1; text-align: left; }
+    .ad-title { font-weight: 600; color: var(--primary); margin-bottom: 5px; }
+    .ad-description { font-size: 14px; color: var(--dark); }
+    .ad-cta { background-color: var(--secondary); color: white; padding: 6px 12px; border-radius: 20px; font-size: 13px; font-weight: 500; }
+    .properties-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(300px,1fr)); gap: 30px; margin: 30px 0; }
+    .property-card { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: transform 0.3s; }
+    .property-card:hover { transform: translateY(-5px); }
+    .property-image { height: 200px; overflow: hidden; }
+    .property-image img { width: 100%; height: 100%; object-fit: cover; }
+    .property-details { padding: 20px; }
+    .property-details h3 { margin-bottom: 10px; color: var(--dark); }
+    .property-price { color: var(--primary); font-weight: bold; font-size: 1.2rem; margin-bottom: 10px; }
+    #contactModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; }
+    #contactModal .modal-content { background: white; padding: 20px; border-radius: 10px; text-align: center; max-width: 400px; }
+    #contactModal button { margin-top: 10px; padding: 8px 16px; background: #006837; color: white; border: none; border-radius: 6px; }
+  </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container header-container">
-            <div class="logo">
-                <h1>Guyana<span>Rentals</span></h1>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#" class="active">Home</a></li>
-                    <li><a href="#list-property-form" class="list-property">List your property</a></li>
-                    <li><a href="#" class="advertise" onclick="showContactInfo(event)">Advertise your business</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+  <!-- Header -->
+  <header>
+    <div class="container header-container">
+      <div class="logo"><h1>Guyana<span>Rentals</span></h1></div>
+      <nav>
+        <ul>
+          <li><a href="#" class="active">Home</a></li>
+          <li><a href="#list-property-form" class="list-property">List your property</a></li>
+          <li><a href="#" class="advertise" onclick="showContactInfo(event)">Advertise your business</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-    <!-- Main Content -->
-    <div class="container">
-        <!-- Top Banner Ad -->
-        <div class="ad-container">
-            <div class="ad-label">Advertisement</div>
-            <a href="https://example.com" target="_blank" class="ad-banner">
-                <div class="ad-content">
-                    <img src="https://via.placeholder.com/60x60.png?text=Logo" alt="Advertiser Logo" class="ad-image">
-                    <div class="ad-text">
-                        <div class="ad-title">AutoXpress - Quality Cars at Great Prices</div>
-                        <div class="ad-description">Find your dream car today with our special financing options</div>
-                    </div>
-                    <div class="ad-cta">Learn More</div>
-                </div>
-            </a>
-        </div>
-
-        <h2>Featured Properties</h2>
-        
-        <!-- Properties Grid -->
-        <div class="properties-grid">
-            <!-- Property 1 -->
-            <div class="property-card">
-                <div class="property-image">
-                    <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=870&q=80" alt="Luxury Apartment">
-                </div>
-                <div class="property-details">
-                    <h3>Luxury Apartment in Georgetown</h3>
-                    <div class="property-price">GYD $250,000/mo</div>
-                    <p>Beautiful 3 bedroom apartment with modern amenities in the heart of Georgetown.</p>
-                </div>
-            </div>
-            
-            <!-- Property 2 -->
-            <div class="property-card">
-                <div class="property-image">
-                    <img src="https://images.unsplash.com/photo-1574362848149-11496d93a7c7?auto=format&fit=crop&w=784&q=80" alt="Family Home">
-                </div>
-                <div class="property-details">
-                    <h3>Family Home in Linden</h3>
-                    <div class="property-price">GYD $180,000/mo</div>
-                    <p>Spacious 4 bedroom home perfect for families, with a large yard and garden.</p>
-                </div>
-            </div>
-            
-            <!-- Property 3 -->
-            <div class="property-card">
-                <div class="property-image">
-                    <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=870&q=80" alt="Studio Apartment">
-                </div>
-                <div class="property-details">
-                    <h3>Studio Apartment in New Amsterdam</h3>
-                    <div class="property-price">GYD $90,000/mo</div>
-                    <p>Cozy studio apartment with modern furnishings, perfect for students or young professionals.</p>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Embedded Google Form Section -->
-        <h2 id="list-property-form">List Your Property</h2>
-        <p>Fill out the form below to submit your rental property. Please include clear photos.</p>
-        <iframe src="https://docs.google.com/forms/d/e/YOUR_GOOGLE_FORM_EMBED_URL/viewform?embedded=true" 
-                width="100%" height="800" frameborder="0" marginheight="0" marginwidth="0">
-            Loading…
-        </iframe>
-
-        <!-- Middle Banner Ad -->
-        <div class="ad-container">
-            <div class="ad-label">Sponsored</div>
-            <a href="https://example.com" target="_blank" class="ad-banner">
-                <div class="ad-content">
-                    <img src="https://via.placeholder.com/60x60.png?text=Logo" alt="Advertiser Logo" class="ad-image">
-                    <div class="ad-text">
-                        <div class="ad-title">GT Bank - Home Loans at 5.5% APR</div>
-                        <div class="ad-description">Special mortgage rates for first-time home buyers</div>
-                    </div>
-                    <div class="ad-cta">Apply Now</div>
-                </div>
-            </a>
-        </div>
+  <!-- Main Content -->
+  <div class="container">
+    <!-- Top Ads -->
+    <div class="ad-container">
+      <div class="ad-label">Advertisement</div>
+      <div id="top-ads"></div>
     </div>
 
-    <!-- Contact Info Modal -->
-    <div id="contactModal">
-        <div class="modal-content">
-            <h2>Advertise with Us</h2>
-            <p>Email: <a href="mailto:youremail@example.com">youremail@example.com</a></p>
-            <p>Phone: <a href="tel:+5926000000">+592 600 0000</a></p>
-            <button onclick="closeModal()">Close</button>
-        </div>
-    </div>
+    <h2>Featured Properties</h2>
+    <div class="properties-grid" id="properties-grid"></div>
 
-    <script>
-        // Ad click tracker (placeholder)
-        document.querySelectorAll('.ad-banner').forEach(ad => {
-            ad.addEventListener('click', function() {
-                const adTitle = this.querySelector('.ad-title').textContent;
-                console.log(`Ad clicked: ${adTitle}`);
-            });
+    <!-- Google Form -->
+    <h2 id="list-property-form">List Your Property</h2>
+    <p>Fill out the form below to submit your rental property. Please include clear photos.</p>
+    <iframe src="https://docs.google.com/forms/d/e/YOUR_GOOGLE_FORM_EMBED_URL/viewform?embedded=true"
+            width="100%" height="800" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+
+    <!-- More Ads -->
+    <div class="ad-container">
+      <div class="ad-label">Sponsored</div>
+      <div id="sponsored-ads"></div>
+    </div>
+  </div>
+
+  <!-- Contact Info Modal -->
+  <div id="contactModal">
+    <div class="modal-content">
+      <h2>Advertise with Us</h2>
+      <p>Email: <a href="mailto:youremail@example.com">youremail@example.com</a></p>
+      <p>Phone: <a href="tel:+5926000000">+592 600 0000</a></p>
+      <button onclick="closeModal()">Close</button>
+    </div>
+  </div>
+
+  <script>
+    // Fetch and display JSON data
+    async function loadData() {
+      try {
+        const response = await fetch("properties.json"); // must be in same folder
+        const data = await response.json();
+
+        // Properties
+        const propertiesContainer = document.getElementById("properties-grid");
+        data.properties.forEach(p => {
+          const card = document.createElement("div");
+          card.className = "property-card";
+          card.innerHTML = `
+            <div class="property-image">
+              <img src="${p.images[0]}" alt="${p.title}">
+            </div>
+            <div class="property-details">
+              <h3>${p.title}</h3>
+              <div class="property-price">GYD $${p.price}/mo</div>
+              <p>${p.description}</p>
+              <p><b>Location:</b> ${p.location}</p>
+              <p><b>Bedrooms:</b> ${p.bedrooms} | <b>Bathrooms:</b> ${p.bathrooms}</p>
+            </div>
+          `;
+          propertiesContainer.appendChild(card);
         });
 
-        // Contact modal controls
-        function showContactInfo(e) {
-            e.preventDefault();
-            document.getElementById("contactModal").style.display = "flex";
-        }
-        function closeModal() {
-            document.getElementById("contactModal").style.display = "none";
-        }
-    </script>
+        // Ads
+        const topAds = document.getElementById("top-ads");
+        const sponsoredAds = document.getElementById("sponsored-ads");
+        data.advertisements.forEach((ad, index) => {
+          const adBanner = document.createElement("a");
+          adBanner.href = ad.link;
+          adBanner.target = "_blank";
+          adBanner.className = "ad-banner";
+          adBanner.innerHTML = `
+            <div class="ad-content">
+              <img src="${ad.image}" alt="${ad.name}" class="ad-image">
+              <div class="ad-text">
+                <div class="ad-title">${ad.name}</div>
+                <div class="ad-description">${ad.description}</div>
+              </div>
+              <div class="ad-cta">Learn More</div>
+            </div>
+          `;
+          if (index % 2 === 0) {
+            topAds.appendChild(adBanner);
+          } else {
+            sponsoredAds.appendChild(adBanner);
+          }
+        });
+      } catch (err) {
+        console.error("Error loading data:", err);
+      }
+    }
+    loadData();
+
+    // Contact modal
+    function showContactInfo(e) {
+      e.preventDefault();
+      document.getElementById("contactModal").style.display = "flex";
+    }
+    function closeModal() {
+      document.getElementById("contactModal").style.display = "none";
+    }
+  </script>
 </body>
 </html>
