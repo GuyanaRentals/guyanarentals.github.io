@@ -10,10 +10,14 @@
     :root { --primary: #006837; --secondary: #F9A825; --light: #f8f9fa; --dark: #343a40; --gray: #6c757d; }
     body { background-color: #f5f5f5; color: #333; line-height: 1.6; }
     .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 15px; }
+
+    /* Header */
     header { background-color: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
     .header-container { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; }
-    .logo h1 { color: var(--primary); font-size: 24px; } .logo span { color: var(--secondary); }
-    nav ul { display: flex; list-style: none; } nav ul li { margin-left: 20px; }
+    .logo h1 { color: var(--primary); font-size: 24px; }
+    .logo span { color: var(--secondary); }
+    nav ul { display: flex; list-style: none; }
+    nav ul li { margin-left: 20px; }
     nav ul li a { text-decoration: none; color: var(--dark); font-weight: 500; transition: all 0.3s; padding: 8px 15px; border-radius: 4px; }
     nav ul li a:hover { color: var(--primary); background-color: rgba(0,104,55,0.1); }
     nav ul li a.active { color: var(--primary); background-color: rgba(0,104,55,0.1); }
@@ -21,6 +25,8 @@
     nav ul li a.list-property:hover { background-color: #005126; }
     nav ul li a.advertise { background-color: var(--secondary); color: white; }
     nav ul li a.advertise:hover { background-color: #e59700; }
+
+    /* Ads */
     .ad-container { width: 100%; margin: 20px 0; text-align: center; }
     .ad-label { font-size: 12px; color: var(--gray); text-transform: uppercase; margin-bottom: 5px; }
     .ad-banner { display: block; width: 100%; max-width: 728px; margin: 0 auto; background: linear-gradient(135deg,#f6f9fc 0%,#e9eff5 100%); border: 1px solid #ddd; border-radius: 8px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; text-decoration: none; color: inherit; }
@@ -31,6 +37,8 @@
     .ad-title { font-weight: 600; color: var(--primary); margin-bottom: 5px; }
     .ad-description { font-size: 14px; color: var(--dark); }
     .ad-cta { background-color: var(--secondary); color: white; padding: 6px 12px; border-radius: 20px; font-size: 13px; font-weight: 500; }
+
+    /* Properties */
     .properties-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(300px,1fr)); gap: 30px; margin: 30px 0; }
     .property-card { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: transform 0.3s; }
     .property-card:hover { transform: translateY(-5px); }
@@ -39,9 +47,21 @@
     .property-details { padding: 20px; }
     .property-details h3 { margin-bottom: 10px; color: var(--dark); }
     .property-price { color: var(--primary); font-weight: bold; font-size: 1.2rem; margin-bottom: 10px; }
+
+    /* Contact Modal */
     #contactModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; }
     #contactModal .modal-content { background: white; padding: 20px; border-radius: 10px; text-align: center; max-width: 400px; }
     #contactModal button { margin-top: 10px; padding: 8px 16px; background: #006837; color: white; border: none; border-radius: 6px; }
+
+    /* ✅ Responsive Fix for Buttons */
+    @media (max-width: 768px) {
+      nav ul { flex-direction: column; align-items: center; padding: 0; }
+      nav ul li { margin: 8px 0; width: auto; }
+      nav ul li a { font-size: 14px; padding: 6px 12px; border-radius: 6px; display: inline-block; width: auto; }
+    }
+    @media (max-width: 480px) {
+      nav ul li a { font-size: 13px; padding: 5px 10px; }
+    }
   </style>
 </head>
 <body>
@@ -97,7 +117,7 @@
     // Fetch and display JSON data
     async function loadData() {
       try {
-        const response = await fetch("properties.json"); // must be in same folder
+        const response = await fetch("properties.json"); // must be in same folder as index.html
         const data = await response.json();
 
         // Properties
