@@ -50,11 +50,6 @@
             padding: 15px 0;
         }
         
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-        
         .logo h1 {
             color: var(--primary);
             font-size: 24px;
@@ -184,38 +179,6 @@
             font-weight: 500;
         }
         
-        /* Sidebar Ad */
-        .sidebar-ad {
-            width: 100%;
-            margin: 20px 0;
-        }
-        
-        .sidebar-ad .ad-banner {
-            max-width: 300px;
-            height: 250px;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .sidebar-ad .ad-content {
-            flex-direction: column;
-            justify-content: center;
-            text-align: center;
-            padding: 20px;
-        }
-        
-        .sidebar-ad .ad-image {
-            height: 80px;
-            width: 80px;
-            margin-right: 0;
-            margin-bottom: 15px;
-        }
-        
-        .sidebar-ad .ad-text {
-            text-align: center;
-            margin-bottom: 15px;
-        }
-        
         /* Properties Grid */
         .properties-grid {
             display: grid;
@@ -262,54 +225,31 @@
             font-size: 1.2rem;
             margin-bottom: 10px;
         }
-        
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .header-container {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            nav ul {
-                margin: 15px 0;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            nav ul li {
-                margin: 5px 10px;
-            }
-            
-            .ad-content {
-                padding: 0 10px;
-            }
-            
-            .ad-title {
-                font-size: 14px;
-            }
-            
-            .ad-description {
-                display: none;
-            }
+
+        /* Contact Modal */
+        #contactModal {
+            display: none; 
+            position: fixed; 
+            top: 0; left: 0; 
+            width: 100%; height: 100%; 
+            background: rgba(0,0,0,0.5); 
+            justify-content: center; 
+            align-items: center;
         }
-        
-        @media (max-width: 576px) {
-            nav ul {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            nav ul li {
-                margin: 5px 0;
-                width: 100%;
-                text-align: center;
-            }
-            
-            nav ul li a {
-                display: block;
-                width: 100%;
-                box-sizing: border-box;
-            }
+        #contactModal .modal-content {
+            background: white; 
+            padding: 20px; 
+            border-radius: 10px; 
+            text-align: center; 
+            max-width: 400px;
+        }
+        #contactModal button {
+            margin-top: 10px; 
+            padding: 8px 16px; 
+            background: #006837; 
+            color: white; 
+            border: none; 
+            border-radius: 6px;
         }
     </style>
 </head>
@@ -323,8 +263,8 @@
             <nav>
                 <ul>
                     <li><a href="#" class="active">Home</a></li>
-                    <li><a href="#" class="list-property">List your property</a></li>
-                    <li><a href="#" class="advertise">Advertise your business</a></li>
+                    <li><a href="#list-property-form" class="list-property">List your property</a></li>
+                    <li><a href="#" class="advertise" onclick="showContactInfo(event)">Advertise your business</a></li>
                 </ul>
             </nav>
         </div>
@@ -354,7 +294,7 @@
             <!-- Property 1 -->
             <div class="property-card">
                 <div class="property-image">
-                    <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="Luxury Apartment">
+                    <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=870&q=80" alt="Luxury Apartment">
                 </div>
                 <div class="property-details">
                     <h3>Luxury Apartment in Georgetown</h3>
@@ -366,7 +306,7 @@
             <!-- Property 2 -->
             <div class="property-card">
                 <div class="property-image">
-                    <img src="https://images.unsplash.com/photo-1574362848149-11496d93a7c7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=784&q=80" alt="Family Home">
+                    <img src="https://images.unsplash.com/photo-1574362848149-11496d93a7c7?auto=format&fit=crop&w=784&q=80" alt="Family Home">
                 </div>
                 <div class="property-details">
                     <h3>Family Home in Linden</h3>
@@ -378,7 +318,7 @@
             <!-- Property 3 -->
             <div class="property-card">
                 <div class="property-image">
-                    <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="Studio Apartment">
+                    <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=870&q=80" alt="Studio Apartment">
                 </div>
                 <div class="property-details">
                     <h3>Studio Apartment in New Amsterdam</h3>
@@ -388,6 +328,14 @@
             </div>
         </div>
         
+        <!-- Embedded Google Form Section -->
+        <h2 id="list-property-form">List Your Property</h2>
+        <p>Fill out the form below to submit your rental property. Please include clear photos.</p>
+        <iframe src="https://docs.google.com/forms/d/e/YOUR_GOOGLE_FORM_EMBED_URL/viewform?embedded=true" 
+                width="100%" height="800" frameborder="0" marginheight="0" marginwidth="0">
+            Loading…
+        </iframe>
+
         <!-- Middle Banner Ad -->
         <div class="ad-container">
             <div class="ad-label">Sponsored</div>
@@ -402,28 +350,35 @@
                 </div>
             </a>
         </div>
-        
-        <!-- More content would go here -->
+    </div>
+
+    <!-- Contact Info Modal -->
+    <div id="contactModal">
+        <div class="modal-content">
+            <h2>Advertise with Us</h2>
+            <p>Email: <a href="mailto:youremail@example.com">youremail@example.com</a></p>
+            <p>Phone: <a href="tel:+5926000000">+592 600 0000</a></p>
+            <button onclick="closeModal()">Close</button>
+        </div>
     </div>
 
     <script>
-        // For tracking ad clicks (requires backend integration for actual implementation)
+        // Ad click tracker (placeholder)
         document.querySelectorAll('.ad-banner').forEach(ad => {
             ad.addEventListener('click', function() {
                 const adTitle = this.querySelector('.ad-title').textContent;
                 console.log(`Ad clicked: ${adTitle}`);
-                // Here you would send this data to your analytics/backend
             });
         });
-        
-        // Example function to rotate ads
-        function rotateAds() {
-            // This would be implemented with actual ad rotation logic
-            console.log("Ad rotation would happen here");
+
+        // Contact modal controls
+        function showContactInfo(e) {
+            e.preventDefault();
+            document.getElementById("contactModal").style.display = "flex";
         }
-        
-        // Rotate ads every 30 seconds (example)
-        setInterval(rotateAds, 30000);
+        function closeModal() {
+            document.getElementById("contactModal").style.display = "none";
+        }
     </script>
 </body>
 </html>
