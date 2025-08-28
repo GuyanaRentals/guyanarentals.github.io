@@ -16,6 +16,7 @@
     .header-container { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; }
     .logo h1 { color: var(--primary); font-size: 24px; }
     .logo span { color: var(--secondary); }
+
     nav ul { display: flex; list-style: none; }
     nav ul li { margin-left: 20px; }
     nav ul li a { text-decoration: none; color: var(--dark); font-weight: 500; transition: all 0.3s; padding: 8px 15px; border-radius: 4px; }
@@ -25,6 +26,17 @@
     nav ul li a.list-property:hover { background-color: #005126; }
     nav ul li a.advertise { background-color: var(--secondary); color: white; }
     nav ul li a.advertise:hover { background-color: #e59700; }
+
+    /* Hamburger */
+    .menu-toggle { display: none; font-size: 22px; cursor: pointer; color: var(--dark); }
+    .menu-toggle:hover { color: var(--primary); }
+
+    @media (max-width: 768px) {
+      nav ul { display: none; flex-direction: column; background: white; position: absolute; top: 60px; right: 15px; width: 200px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); padding: 10px 0; }
+      nav ul.show { display: flex; }
+      nav ul li { margin: 10px 0; text-align: center; }
+      .menu-toggle { display: block; }
+    }
 
     /* Ads */
     .ad-container { width: 100%; margin: 20px 0; text-align: center; }
@@ -52,16 +64,6 @@
     #contactModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; }
     #contactModal .modal-content { background: white; padding: 20px; border-radius: 10px; text-align: center; max-width: 400px; }
     #contactModal button { margin-top: 10px; padding: 8px 16px; background: #006837; color: white; border: none; border-radius: 6px; }
-
-    /* ✅ Responsive Fix for Buttons */
-    @media (max-width: 768px) {
-      nav ul { flex-direction: column; align-items: center; padding: 0; }
-      nav ul li { margin: 8px 0; width: auto; }
-      nav ul li a { font-size: 14px; padding: 6px 12px; border-radius: 6px; display: inline-block; width: auto; }
-    }
-    @media (max-width: 480px) {
-      nav ul li a { font-size: 13px; padding: 5px 10px; }
-    }
   </style>
 </head>
 <body>
@@ -69,8 +71,9 @@
   <header>
     <div class="container header-container">
       <div class="logo"><h1>Guyana<span>Rentals</span></h1></div>
+      <div class="menu-toggle" onclick="toggleMenu()">☰</div>
       <nav>
-        <ul>
+        <ul id="nav-links">
           <li><a href="#" class="active">Home</a></li>
           <li><a href="#list-property-form" class="list-property">List your property</a></li>
           <li><a href="#" class="advertise" onclick="showContactInfo(event)">Advertise your business</a></li>
@@ -114,10 +117,15 @@
   </div>
 
   <script>
+    // Hamburger menu toggle
+    function toggleMenu() {
+      document.getElementById("nav-links").classList.toggle("show");
+    }
+
     // Fetch and display JSON data
     async function loadData() {
       try {
-        const response = await fetch("properties.json"); // must be in same folder as index.html
+        const response = await fetch("properties.json"); // must be in same folder
         const data = await response.json();
 
         // Properties
