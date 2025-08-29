@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guyana Rentals - Admin Panel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar Navigation */
+        .sidebar {
+            width: 250px;
+            background: #2c3e50;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar-header {
+            padding: 20px;
+            background: #1a2530;
+            text-align: center;
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+            padding: 10px 0;
+        }
+        
+        .menu-item {
+            padding: 15px 20px;
+            border-left: 4px solid transparent;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .menu-item:hover {
+            background: #1a2530;
+            border-left: 4px solid #4f8bf9;
+        }
+        
+        .menu-item.active {
+            background: #1a2530;
+            border-left: 4px solid #4f8bf9;
+        }
+        
+        .menu-item i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        /* Main Content Area */
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .stats-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-card h3 {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        
+        .stat-card .value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+        
+        .stat-card .change {
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .positive {
+            color: #2ecc71;
+        }
+        
+        .negative {
+            color: #e74c3c;
+        }
+        
+        /* Content Sections */
+        .content-section {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        table th, table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+        
+        table tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .status {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .status-active {
+            background: #e8f5e9;
+            color: #2ecc71;
+        }
+        
+        .status-pending {
+            background: #fff8e1;
+            color: #f39c12;
+        }
+        
+        .status-inactive {
+            background: #ffebee;
+            color: #e74c3c;
+        }
+        
+        /* Buttons */
+        .btn {
+            padding: 8px 16px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: #4f8bf9;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #3a75e0;
+        }
+        
+        .btn-sm {
+            padding: 5px 10px;
+            font-size: 0.8rem;
+        }
+        
+        /* Forms */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+            }
+            
+            .stats-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>Guyana Rentals Admin</h2>
+            </div>
+            <ul class="sidebar-menu">
+                <li class="menu-item active"><i class="fas fa-home"></i> Dashboard</li>
+                <li class="menu-item"><i class="fas fa-building"></i> Properties</li>
+                <li class="menu-item"><i class="fas fa-users"></i> Users</li>
+                <li class="menu-item"><i class="fas fa-file-alt"></i> Content</li>
+                <li class="menu-item"><i class="fas fa-chart-bar"></i> Analytics</li>
+                <li class="menu-item"><i class="fas fa-cog"></i> Settings</li>
+                <li class="menu-item"><i class="fas fa-sign-out-alt"></i> Logout</li>
+            </ul>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <div class="header">
+                <h1>Dashboard</h1>
+                <div class="user-info">
+                    <span>Welcome, Admin</span>
+                </div>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-cards">
+                <div class="stat-card">
+                    <h3>TOTAL PROPERTIES</h3>
+                    <div class="value">142</div>
+                    <div class="change positive"><i class="fas fa-arrow-up"></i> 12% from last month</div>
+                </div>
+                <div class="stat-card">
+                    <h3>ACTIVE LISTINGS</h3>
+                    <div class="value">98</div>
+                    <div class="change positive"><i class="fas fa-arrow-up"></i> 5% from last month</div>
+                </div>
+                <div class="stat-card">
+                    <h3>NEW USERS</h3>
+                    <div class="value">56</div>
+                    <div class="change positive"><i class="fas fa-arrow-up"></i> 23% from last month</div>
+                </div>
+                <div class="stat-card">
+                    <h3>PENDING APPROVALS</h3>
+                    <div class="value">7</div>
+                    <div class="change negative"><i class="fas fa-arrow-down"></i> 3 from yesterday</div>
+                </div>
+            </div>
+
+            <!-- Recent Properties -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2>Recent Properties</h2>
+                    <button class="btn btn-primary">Add New Property</button>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Property</th>
+                            <th>Location</th>
+                            <th>Price</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Luxury Apartment, Georgetown</td>
+                            <td>Georgetown</td>
+                            <td>$1,200/mo</td>
+                            <td><span class="status status-active">Active</span></td>
+                            <td>
+                                <button class="btn btn-primary btn-sm">Edit</button>
+                                <button class="btn btn-primary btn-sm">View</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Beach House, Essequibo Coast</td>
+                            <td>Essequibo Coast</td>
+                            <td>$1,800/mo</td>
+                            <td><span class="status status-pending">Pending</span></td>
+                            <td>
+                                <button class="btn btn-primary btn-sm">Edit</button>
+                                <button class="btn btn-primary btn-sm">View</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Commercial Space, City Center</td>
+                            <td>Georgetown</td>
+                            <td>$2,100/mo</td>
+                            <td><span class="status status-active">Active</span></td>
+                            <td>
+                                <button class="btn btn-primary btn-sm">Edit</button>
+                                <button class="btn btn-primary btn-sm">View</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Family Home, Bartica</td>
+                            <td>Bartica</td>
+                            <td>$950/mo</td>
+                            <td><span class="status status-inactive">Inactive</span></td>
+                            <td>
+                                <button class="btn btn-primary btn-sm">Edit</button>
+                                <button class="btn btn-primary btn-sm">View</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Add Property Form -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2>Add New Property</h2>
+                </div>
+                <form>
+                    <div class="form-group">
+                        <label for="propertyTitle">Property Title</label>
+                        <input type="text" id="propertyTitle" class="form-control" placeholder="Enter property title">
+                    </div>
+                    <div class="form-group">
+                        <label for="propertyDescription">Description</label>
+                        <textarea id="propertyDescription" class="form-control" rows="4" placeholder="Enter property description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="propertyPrice">Price ($/month)</label>
+                        <input type="number" id="propertyPrice" class="form-control" placeholder="Enter price">
+                    </div>
+                    <div class="form-group">
+                        <label for="propertyLocation">Location</label>
+                        <input type="text" id="propertyLocation" class="form-control" placeholder="Enter location">
+                    </div>
+                    <div class="form-group">
+                        <label for="propertyImage">Property Image</label>
+                        <input type="file" id="propertyImage" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Property</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple interactivity for the admin panel
+        document.addEventListener('DOMContentLoaded', function() {
+            // Menu item click handling
+            const menuItems = document.querySelectorAll('.menu-item');
+            menuItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    menuItems.forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // Example of loading data from a JSON file
+            // This would be replaced with your actual data loading logic
+            console.log('Admin panel loaded. Ready to manage properties.');
+            
+            // You would typically have functions here to:
+            // 1. Load property data from your JSON file or backend
+            // 2. Handle form submissions for adding/editing properties
+            // 3. Update the UI based on user actions
+        });
+    </script>
+</body>
+</html>
