@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GuyanaRentals - Admin Panel</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    :root { --primary: #006837; --secondary: #F9A825; --light: #f8f9fa; --dark: #343a40; --gray: #6c757d; }
+    body { background-color: #f5f5f5; color: #333; line-height: 1.6; }
+    .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 15px; }
+
+    /* Header */
+    header { background-color: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
+    .header-container { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; }
+    .logo h1 { color: var(--primary); font-size: 24px; }
+    .logo span { color: var(--secondary); }
+
+    /* Admin Panel */
+    .admin-panel { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin: 20px 0; }
+    .admin-panel h2 { color: var(--primary); margin-bottom: 15px; }
+    .tabs { display: flex; border-bottom: 1px solid #ddd; margin-bottom: 20px; flex-wrap: wrap; }
+    .tab { padding: 10px 20px; cursor: pointer; border-bottom: 2px solid transparent; }
+    .tab.active { border-bottom: 2px solid var(--primary); color: var(--primary); font-weight: 500; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .form-group { margin-bottom: 15px; }
+    .form-group label { display: block; margin-bottom: 5px; font-weight: 500; }
+    .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
+    .btn { padding: 10px 15px; background: var(--primary); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 500; }
+    .btn:hover { background: #005126; }
+    .btn-secondary { background: var(--secondary); }
+    .btn-secondary:hover { background: #e59700; }
+    .btn-small { padding: 5px 10px; font-size: 0.9rem; }
+
+    /* Status Messages */
+    .status { padding: 10px; border-radius: 4px; margin: 10px 0; }
+    .status.success { background: #d4edda; color: #155724; }
+    .status.error { background: #f8d7da; color: #721c24; }
+    .status.info { background: #cce5ff; color: #004085; }
+
+    /* Properties */
+    .properties-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(300px,1fr)); gap: 30px; margin: 30px 0; }
+    .property-card { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: transform 0.3s; position: relative; }
+    .property-card:hover { transform: translateY(-5px); }
+    .property-image { height: 200px; overflow: hidden; }
+    .property-image img { width: 100%; height: 100%; object-fit: cover; }
+    .property-details { padding: 20px; }
+    .property-details h3 { margin-bottom: 10px; color: var(--dark); }
+    .property-price { color: var(--primary); font-weight: bold; font-size: 1.2rem; margin-bottom: 10px; }
+    .admin-controls { position: absolute; top: 10px; right: 10px; }
+    
+    /* Back Link */
+    .back-link { margin: 20px 0; }
+    .back-link a { color: var(--primary); text-decoration: none; font-weight: 500; }
+    .back-link a:hover { text-decoration: underline; }
+
+    /* Mobile Improvements */
+    @media (max-width: 768px) {
+      .tabs { flex-direction: column; }
+      .tab { padding: 10px; text-align: center; }
+      .properties-grid { grid-template-columns: 1fr; gap: 20px; }
+      .property-card { margin-bottom: 15px; }
+      .header-container { padding: 10px 0; }
+      .logo h1 { font-size: 20px; }
+    }
+
+    @media (max-width: 480px) {
+      .container { padding: 0 10px; }
+      .property-image { height: 160px; }
+      .property-details { padding: 15px; }
+      .property-details h3 { font-size: 18px; }
+      .property-price { font-size: 1.1rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container header-container">
+      <div class="logo"><h1>Guyana<span>Rentals</span> Admin</h1></div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="back-link">
+      <a href="index.html">&larr; Back to Website</a>
+    </div>
+
+    <!-- Admin Panel -->
+    <div class="admin-panel" id="admin-panel">
+      <h2>Admin Panel - Manage Content</h2>
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab('add-property')">Add Property</div>
+        <div class="tab" onclick="switchTab('add-ad')">Add Advertisement</div>
+        <div class="tab" onclick="switchTab('view-content')">View Content</div>
+        <div class="tab" onclick="switchTab('jsonbin-config')">JSONBin.io Sync</div>
+      </div>
+      
+      <!-- Add Property Form -->
+      <div class="tab-content active" id="add-property">
+        <div class="status info">
+          Add a new rental property to your website.
+        </div>
+        <div class="form-group">
+          <label for="property-title">Property Title:</label>
+          <input type="text" id="property-title" placeholder="Luxury Apartment in Georgetown">
+        </div>
+        <div class="form-group">
+          <label for="property-price">Monthly Price (GYD):</label>
+          <input type="number" id="property-price" placeholder="150000">
+        </div>
+        <div class="form-group">
+          <label for="property-description">Description:</label>
+          <textarea id="property-description" rows="3" placeholder="Describe the property..."></textarea>
+        </div>
+        <div class="form-group">
+          <label for="property-location">Location:</label>
+          <input type="text" id="property-location" placeholder="Georgetown">
+        </div>
+        <div class="form-group">
+          <label for="property-bedrooms">Bedrooms:</label>
+          <select id="property-bedrooms">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5+">5+</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="property-bathrooms">Bathrooms:</label>
+          <select id="property-bathrooms">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4+">4+</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="property-image">Image URL:</label>
+          <input type="text" id="property-image" placeholder="https://example.com/image.jpg">
+        </div>
+        <button class="btn" onclick="addProperty()">Add Property</button>
+      </div>
+      
+      <!-- Add Advertisement Form -->
+      <div class="tab-content" id="add-ad">
+        <div class="status info">
+          Add a new advertisement to your website.
+        </div>
+        <div class="form-group">
+          <label for="ad-name">Advertiser Name:</label>
+          <input type="text" id="ad-name" placeholder="Company Name">
+        </div>
+        <div class="form-group">
+          <label for="ad-description">Description:</label>
+          <textarea id="ad-description" rows="2" placeholder="Brief description of what you're advertising..."></textarea>
+        </div>
+        <div class="form-group">
+          <label for="ad-image">Image URL:</label>
+          <input type="text" id="ad-image" placeholder="https://example.com/logo.png">
+        </div>
+        <div class="form-group">
+          <label for="ad-link">Destination URL:</label>
+          <input type="text" id="ad-link" placeholder="https://example.com">
+        </div>
+        <button class="btn" onclick="addAdvertisement()">Add Advertisement</button>
+      </div>
+      
+      <!-- View Content -->
+      <div class="tab-content" id="view-content">
+        <div class="status info">
+          This is a preview of your current properties and advertisements.
+        </div>
+        
+        <h3>Current Properties</h3>
+        <div id="properties-preview" class="properties-grid"></div>
+        
+        <h3>Current Advertisements</h3>
+        <div id="ads-preview"></div>
+        
+        <div class="form-group">
+          <label for="json-data">JSON Data (for manual export/import):</label>
+          <textarea id="json-data" rows="10" style="font-family: monospace;"></textarea>
+        </div>
+      </div>
+
+      <!-- JSONBin.io Config -->
+      <div class="tab-content" id="jsonbin-config-tab">
+        <div class="status info">
+          Configure your JSONBin.io settings to sync your data across devices.
+          <br><br>
+          <strong>How to get these credentials:</strong>
+          <ol>
+            <li>Sign up at <a href="https://jsonbin.io/" target="_blank">JSONBin.io</a></li>
+            <li>Create a new bin with your data</li>
+            <li>Find your Bin ID in the URL or dashboard</li>
+            <li>Get your X-Access-Key from your account settings</li>
+          </ol>
+        </div>
+        
+        <div class="form-group">
+          <label for="jsonbin-bin-id">Bin ID:</label>
+          <input type="text" id="jsonbin-bin-id" placeholder="Enter your Bin ID">
+        </div>
+        
+        <div class="form-group">
+          <label for="jsonbin-access-key">X-Access-Key:</label>
+          <input type="password" id="jsonbin-access-key" placeholder="Enter your X-Access-Key">
+        </div>
+        
+        <button class="btn" onclick="saveJsonBinConfig()">Save Configuration</button>
+        <button class="btn btn-secondary" onclick="testJsonBinConnection()">Test Connection</button>
+        <button class="btn btn-secondary" onclick="loadFromJsonBin()">Load Data from JSONBin</button>
+        <button class="btn btn-secondary" onclick="saveToJsonBin()">Save Data to JSONBin</button>
+      </div>
+    </div>
+
+    <div id="status-message"></div>
+  </div>
+
+  <script>
+    // Data storage
+    let properties = [];
+    let advertisements = [];
+    let jsonBinConfig = { binId: '', accessKey: '' };
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', function() {
+      loadData();
+      loadJsonBinConfig();
+      updatePreview();
+      updateJSONData();
+    });
+
+    // Switch between tabs
+    function switchTab(tabName) {
+      document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+      
+      if (tabName === 'add-property') {
+        document.querySelector('.tab:nth-child(1)').classList.add('active');
+        document.getElementById('add-property').classList.add('active');
+      } else if (tabName === 'add-ad') {
+        document.querySelector('.tab:nth-child(2)').classList.add('active');
+        document.getElementById('add-ad').classList.add('active');
+      } else if (tabName === 'view-content') {
+        document.querySelector('.tab:nth-child(3)').classList.add('active');
+        document.getElementById('view-content').classList.add('active');
+        updatePreview();
+        updateJSONData();
+      } else if (tabName === 'jsonbin-config') {
+        document.querySelector('.tab:nth-child(4)').classList.add('active');
+        document.getElementById('jsonbin-config-tab').classList.add('active');
+        document.getElementById('jsonbin-bin-id').value = jsonBinConfig.binId || '';
+        document.getElementById('jsonbin-access-key').value = jsonBinConfig.accessKey || '';
+      }
+    }
+
+    // Load JSONBin.io config from localStorage
+    function loadJsonBinConfig() {
+      const savedConfig = localStorage.getItem('gr_jsonbin_config');
+      if (savedConfig) {
+        jsonBinConfig = JSON.parse(savedConfig);
+      }
+    }
+
+    // Save JSONBin.io config to localStorage
+    function saveJsonBinConfig() {
+      jsonBinConfig.binId = document.getElementById('jsonbin-bin-id').value;
+      jsonBinConfig.accessKey = document.getElementById('jsonbin-access-key').value;
+      
+      localStorage.setItem('gr_jsonbin_config', JSON.stringify(jsonBinConfig));
+      showStatus('JSONBin.io configuration saved successfully!', 'success');
+    }
+
+    // Test connection to JSONBin.io
+    async function testJsonBinConnection() {
+      if (!jsonBinConfig.binId || !jsonBinConfig.accessKey) {
+        showStatus('Please enter both Bin ID and Access Key first', 'error');
+        return;
+      }
+      
+      try {
+        showStatus('Testing connection to JSONBin.io...', 'info');
+        
+        const response = await fetch(`https://api.jsonbin.io/v3/b/${jsonBinConfig.binId}`, {
+          method: 'GET',
+          headers: {
+            'X-Access-Key': jsonBinConfig.accessKey
+          }
+        });
+        
+        if (response.ok) {
+          showStatus('Connection successful! You can now sync your data.', 'success');
+        } else if (response.status === 404) {
+          showStatus('Bin not found. Please check your Bin ID.', 'error');
+        } else if (response.status === 401) {
+          showStatus('Invalid access key. Please check your X-Access-Key.', 'error');
+        } else {
+          showStatus('Connection failed. Please check your credentials.', 'error');
+        }
+      } catch (error) {
+        showStatus('Error: ' + error.message, 'error');
+      }
+    }
+
+    // Load data from JSONBin.io
+    async function loadFromJsonBin() {
+      if (!jsonBinConfig.binId || !jsonBinConfig.accessKey) {
+        showStatus('Please configure your JSONBin.io credentials first', 'error');
+        return;
+      }
+      
+      try {
+        showStatus('Loading data from JSONBin.io...', 'info');
+        
+        const response = await fetch(`https://api.jsonbin.io/v3/b/${jsonBinConfig.binId}`, {
+          method: 'GET',
+          headers: {
+            'X-Access-Key': jsonBinConfig.accessKey
+          }
+        });
+        
+        if (!response.ok) {
+          throw new Error('Failed to fetch data from JSONBin.io');
+        }
+        
+        const result = await response.json();
+        const data = result.record;
+        
+        // Update local data
+        properties = data.properties || [];
+        advertisements = data.advertisements || [];
+        
+        // Save to localStorage
+        saveData();
+        
+        // Refresh the display
+        updatePreview();
+        updateJSONData();
+        
+        showStatus('Data loaded successfully from JSONBin.io!', 'success');
+      } catch (error) {
+        console.error("Error loading data from JSONBin.io:", error);
+        showStatus('Error loading data: ' + error.message, 'error');
+      }
+    }
+
+    // Save data to JSONBin.io
+    async function saveToJsonBin() {
+      if (!jsonBinConfig.binId || !jsonBinConfig.accessKey) {
+        showStatus('Please configure your JSONBin.io credentials first', 'error');
+        return;
+      }
+      
+      try {
+        showStatus('Saving data to JSONBin.io...', 'info');
+        
+        const dataToSave = {
+          properties,
+          advertisements
+        };
+        
+        const response = await fetch(`https://api.jsonbin.io/v3/b/${jsonBinConfig.binId}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Access-Key': jsonBinConfig.accessKey
+          },
+          body: JSON.stringify(dataToSave)
+        });
+        
+        if (response.ok) {
+          showStatus('Data saved successfully to JSONBin.io!', 'success');
+        } else {
+          throw new Error('Failed to save data to JSONBin.io');
+        }
+      } catch (error) {
+        console.error("Error saving data to JSONBin.io:", error);
+        showStatus('Error saving data: ' + error.message, 'error');
+      }
+    }
+
+    // Load data from localStorage
+    function loadData() {
+      const savedProperties = localStorage.getItem('gr_properties');
+      const savedAds = localStorage.getItem('gr_advertisements');
+      
+      if (savedProperties) {
+        properties = JSON.parse(savedProperties);
+      }
+      
+      if (savedAds) {
+        advertisements = JSON.parse(savedAds);
+      }
+    }
+
+    // Save data to localStorage
+    function saveData() {
+      localStorage.setItem('gr_properties', JSON.stringify(properties));
+      localStorage.setItem('gr_advertisements', JSON.stringify(advertisements));
+      
+      // Also save a combined version for the main website
+      const websiteData = {
+        properties,
+        advertisements
+      };
+      localStorage.setItem('gr_website_data', JSON.stringify(websiteData));
+    }
+
+    // Add a new property
+    function addProperty() {
+      const title = document.getElementById('property-title').value;
+      const price = document.getElementById('property-price').value;
+      const description = document.getElementById('property-description').value;
+      const location = document.getElementById('property-location').value;
+      const bedrooms = document.getElementById('property-bedrooms').value;
+      const bathrooms = document.getElementById('property-bathrooms').value;
+      const image = document.getElementById('property-image').value;
+      
+      if (!title || !price || !description || !location) {
+        showStatus('Please fill in all required fields', 'error');
+        return;
+      }
+      
+      properties.push({
+        title,
+        price: parseInt(price),
+        description,
+        location,
+        bedrooms,
+        bathrooms,
+        images: [image || 'https://via.placeholder.com/600x400?text=Property+Image']
+      });
+      
+      saveData();
+      
+      // Clear form
+      document.getElementById('property-title').value = '';
+      document.getElementById('property-price').value = '';
+      document.getElementById('property-description').value = '';
+      document.getElementById('property-location').value = '';
+      document.getElementById('property-bedrooms').value = '1';
+      document.getElementById('property-bathrooms').value = '1';
+      document.getElementById('property-image').value = '';
+      
+      showStatus('Property added successfully!', 'success');
+    }
+
+    // Add a new advertisement
+    function addAdvertisement() {
+      const name = document.getElementById('ad-name').value;
+      const description = document.getElementById('ad-description').value;
+      const image = document.getElementById('ad-image').value;
+      const link = document.getElementById('ad-link').value;
+      
+      if (!name || !description || !link) {
+        showStatus('Please fill in all required fields', 'error');
+        return;
+      }
+      
+      advertisements.push({
+        name,
+        description,
+        image: image || 'https://via.placeholder.com/100?text=Ad+Logo',
+        link
+      });
+      
+      saveData();
+      
+      // Clear form
+      document.getElementById('ad-name').value = '';
+      document.getElementById('ad-description').value = '';
+      document.getElementById('ad-image').value = '';
+      document.getElementById('ad-link').value = '';
+      
+      showStatus('Advertisement added successfully!', 'success');
+    }
+
+    // Update preview in admin panel
+    function updatePreview() {
+      const propertiesPreview = document.getElementById('properties-preview');
+      const adsPreview = document.getElementById('ads-preview');
+      
+      // Clear existing content
+      propertiesPreview.innerHTML = '';
+      adsPreview.innerHTML = '';
+      
+      // Properties preview
+      if (properties.length > 0) {
+        properties.forEach((p, index) => {
+          const card = document.createElement("div");
+          card.className = "property-card";
+          card.innerHTML = `
+            <div class="property-image">
+              <img src="${p.images[0]}" alt="${p.title}" onerror="this.src='https://via.placeholder.com/600x400?text=Property+Image'">
+            </div>
+            <div class="property-details">
+              <h3>${p.title}</h3>
+              <div class="property-price">GYD $${p.price.toLocaleString()}/mo</div>
+              <p>${p.location} | ${p.bedrooms} bed | ${p.bathrooms} bath</p>
+            </div>
+            <div class="admin-controls">
+              <button class="btn btn-small" onclick="editProperty(${index})">Edit</button>
+              <button class="btn btn-small" onclick="deleteProperty(${index})">Delete</button>
+            </div>
+          `;
+          propertiesPreview.appendChild(card);
+        });
+      } else {
+        propertiesPreview.innerHTML = '<div class="status info">No properties added yet.</div>';
+      }
+      
+      // Ads preview
+      if (advertisements.length > 0) {
+        advertisements.forEach((ad, index) => {
+          const adItem = document.createElement("div");
+          adItem.className = "ad-banner";
+          adItem.style.marginBottom = '10px';
+          adItem.innerHTML = `
+            <div class="ad-content">
+              <img src="${ad.image}" alt="${ad.name}" class="ad-image" onerror="this.src='https://via.placeholder.com/100?text=Ad+Logo'">
+              <div class="ad-text">
+                <div class="ad-title">${ad.name}</div>
+                <div class="ad-description">${ad.description}</div>
+              </div>
+            </div>
+            <div class="admin-controls">
+              <button class="btn btn-small" onclick="editAd(${index})">Edit</button>
+              <button class="btn btn-small" onclick="deleteAd(${index})">Delete</button>
+            </div>
+          `;
+          adsPreview.appendChild(adItem);
+        });
+      } else {
+        adsPreview.innerHTML = '<div class="status info">No advertisements added yet.</div>';
+      }
+    }
+
+    // Update JSON data textarea
+    function updateJSONData() {
+      const jsonData = {
+        properties,
+        advertisements
+      };
+      document.getElementById('json-data').value = JSON.stringify(jsonData, null, 2);
+    }
+
+    // Edit property
+    function editProperty(index) {
+      const property = properties[index];
+      document.getElementById('property-title').value = property.title;
+      document.getElementById('property-price').value = property.price;
+      document.getElementById('property-description').value = property.description;
+      document.getElementById('property-location').value = property.location;
+      document.getElementById('property-bedrooms').value = property.bedrooms;
+      document.getElementById('property-bathrooms').value = property.bathrooms;
+      document.getElementById('property-image').value = property.images[0];
+      
+      // Switch to add property tab
+      switchTab('add-property');
+      
+      // Remove the old property
+      properties.splice(index, 1);
+      saveData();
+      
+      showStatus('Editing property. Update the form and click "Add Property" to save changes.', 'info');
+    }
+
+    // Delete property
+    function deleteProperty(index) {
+      if (confirm('Are you sure you want to delete this property?')) {
+        properties.splice(index, 1);
+        saveData();
+        updatePreview();
+        updateJSONData();
+        showStatus('Property deleted successfully', 'success');
+      }
+    }
+
+    // Edit ad
+    function editAd(index) {
+      const ad = advertisements[index];
+      document.getElementById('ad-name').value = ad.name;
+      document.getElementById('ad-description').value = ad.description;
+      document.getElementById('ad-image').value = ad.image;
+      document.getElementById('ad-link').value = ad.link;
+      
+      // Switch to add ad tab
+      switchTab('add-ad');
+      
+      // Remove the old ad
+      advertisements.splice(index, 1);
+      saveData();
+      
+      showStatus('Editing advertisement. Update the form and click "Add Advertisement" to save changes.', 'info');
+    }
+
+    // Delete ad
+    function deleteAd(index) {
+      if (confirm('Are you sure you want to delete this advertisement?')) {
+        advertisements.splice(index, 1);
+        saveData();
+        updatePreview();
+        updateJSONData();
+        showStatus('Advertisement deleted successfully', 'success');
+      }
+    }
+
+    // Show status message
+    function showStatus(message, type) {
+      const statusMessage = document.getElementById('status-message');
+      statusMessage.innerHTML = `<div class="status ${type}">${message}</div>`;
+      setTimeout(() => {
+        statusMessage.innerHTML = '';
+      }, 5000);
+    }
+  </script>
+</body>
+</html>
