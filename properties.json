@@ -1,181 +1,67 @@
 {
   "properties": [
     {
-      "id": 1,
-      "title": "Furnished Two (2) Bedroom Apartment",
-      "price": "150000",
+      "title": "Test 1",
+      "price": 150000,
+      "description": "Test 1 description",
       "location": "Industry East Coast Demerara Guyana",
-      "description": "GYD $150,000 per month. Water and WiFi included. Prepaid meter in the apartment. Apartment available until the 1st September. Sorry the pictures don't really show the furniture included but feel free to call or WhatsApp for more information (592) 619-2388",
-      "images": [
-        "https://i.ibb.co/Qjc8vrbj/apartment1.jpg",
-        "https://i.ibb.co/SwM1ysjL/apartment2.jpg",
-        "https://i.ibb.co/bMStYtHG/apartment3.jpg",
-        "https://i.ibb.co/Hp2Q9mWW/apartment4.jpg",
-        "https://i.ibb.co/7xH42YbR/apartment5.jpg",
-        "https://i.ibb.co/ych7Fj5j/apartment6.jpg",
-        "https://i.ibb.co/5hjyV1kw/apartment7.jpg",
-        "https://i.ibb.co/9332WMD4/apartment8.jpg"
-      ],
       "bedrooms": "2",
-      "bathrooms": "2"
+      "bathrooms": "1",
+      "images": [
+        "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fG1vZGVybiUyMGFwYXJ0bWVudHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=600&q=60"
+      ]
     },
     {
-      "id": 2,
-      "title": "Two (2) Bedroom Unfurnished",
-      "price": "150000",
+      "title": "Test 2",
+      "price": 150000,
+      "description": "Test 2 description.",
       "location": "Phase One (1) Parfait Harmony West Bank Demerara (Over The Demerara River)",
-      "description": "GYD $150,000 per month. Located in phase 1 parfait harmony. Spacious living area with modern kitchen. Close to schools and shopping areas.",
-      "images": [
-        "https://i.ibb.co/1GvrQMmj/home1.jpg",
-        "https://i.ibb.co/S7cHSv6m/home2.jpg",
-        "https://i.ibb.co/sdvWXnPW/home3.jpg",
-        "https://i.ibb.co/RpMF4Mhr/home4.jpg",
-        "https://i.ibb.co/gMs9W2jj/home5.jpg",
-        "https://i.ibb.co/nstLsJnv/home6.jpg"
-      ],
       "bedrooms": "2",
-      "bathrooms": "1"
+      "bathrooms": "1",
+      "images": [
+        "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YXBhcnRtZW50fGVufDB8fDB8fHww&auto=format&fit=crop&w=600&q=60"
+      ]
     },
     {
-      "id": 3,
-      "title": "Luxury 3-Bedroom Apartment in Georgetown",
-      "price": "280000",
-      "location": "Queenstown, Georgetown",
-      "description": "Beautiful luxury apartment in the heart of Georgetown. Features modern finishes, secure parking, and 24-hour security. Walking distance to restaurants and businesses.",
-      "images": [
-        "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
-        "https://images.unsplash.com/photo-1484154218962-a197022b5858?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=874&q=80"
-      ],
-      "bedrooms": "3",
-      "bathrooms": "2"
-    },
-    {
-      "id": 4,
-      "title": "Cozy 1-Bedroom Cottage",
-      "price": "90000",
-      "location": "New Amsterdam, Berbice",
-      "description": "Charming cottage with a small garden perfect for singles or couples. Quiet neighborhood with friendly neighbors. Recently renovated with new appliances.",
-      "images": [
-        "https://images.unsplash.com/photo-1449844908441-8829872d2607?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
-      ],
-      "bedrooms": "1",
-      "bathrooms": "1"
-    },
-    {
-      "id": 5,
-      "title": "Spacious Family Home with Yard",
-      "price": "220000",
-      "location": "Diamond, East Bank Demerara",
-      "description": "Perfect for families, this 4-bedroom home features a large backyard, modern kitchen, and living area. Located in a quiet community with easy access to schools and shopping.",
-      "images": [
-        "https://images.unsplash.com/photo-1574362848149-11496d93a7c7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=784&q=80",
-        "https://images.unsplash.com/photo-1586448900407-7397af48d116?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
-      ],
-      "bedrooms": "4",
-      "bathrooms": "2"
-    },
-    {
-      "id": 6,
-      "title": "Modern Studio Apartment",
-      "price": "120000",
-      "location": "Albertown, Georgetown",
-      "description": "Fully furnished studio apartment with all utilities included. Perfect for students or young professionals. Secure building with laundry facilities.",
-      "images": [
-        "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
-      ],
-      "bedrooms": "1",
-      "bathrooms": "1"
-    },
-    {
-      "id": 7,
-      "title": "Waterfront Property with Amazing Views",
-      "price": "350000",
-      "location": "Bartica, Essequibo River",
-      "description": "Stunning waterfront property with panoramic river views. Features a large deck, modern kitchen, and spacious bedrooms. Perfect for those who love nature and tranquility.",
-      "images": [
-        "https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80",
-        "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
-      ],
-      "bedrooms": "3",
-      "bathrooms": "2"
-    },
-    {
-      "id": 8,
-      "title": "Budget-Friendly 2-Bedroom",
-      "price": "130000",
-      "location": "Linden, Upper Demerara-Berbice",
-      "description": "Affordable 2-bedroom home in a quiet Linden neighborhood. Basic furnishings included. Great value for those on a budget.",
-      "images": [
-        "https://images.unsplash.com/photo-1567767292278-a4f21aa2d36e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
-      ],
+      "title": "Test 3",
+      "price": 85000,
+      "description": "Test 3 Description",
+      "location": "Canal #1",
       "bedrooms": "2",
-      "bathrooms": "1"
+      "bathrooms": "1",
+      "images": [
+        "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGFwYXJ0bWVudHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=600&q=60"
+      ]
     },
     {
-      "id": 9,
-      "title": "Executive Apartment in Business District",
-      "price": "320000",
-      "location": "Campbellville, Georgetown",
-      "description": "Luxury executive apartment in the heart of Georgetown's business district. High-end finishes, concierge service, and premium amenities. Perfect for professionals.",
-      "images": [
-        "https://images.unsplash.com/photo-1669071198880-65f3cd0515f3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
-        "https://images.unsplash.com/photo-1631889992022-7cf37f3e7fcd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
-      ],
+      "title": "Test 5",
+      "price": 160000,
+      "description": "Test 5 Description",
+      "location": "Bel-Air Georgetown",
       "bedrooms": "2",
-      "bathrooms": "2"
+      "bathrooms": "1",
+      "images": [
+        "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzJ8fGFwYXJ0bWVudHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=600&q=60"
+      ]
     },
     {
-      "id": 10,
-      "title": "Charming Heritage Home",
-      "price": "275000",
-      "location": "Cummingsburg, Georgetown",
-      "description": "Beautifully restored colonial-era home with original architectural details. High ceilings, wooden floors, and a peaceful garden. A unique opportunity to own a piece of Guyana's history.",
-      "images": [
-        "https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
-        "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=958&q=80"
-      ],
-      "bedrooms": "3",
-      "bathrooms": "2"
-    },
-    {
-      "id": 11,
-      "title": "Modern Townhouse",
-      "price": "295000",
-      "location": "Providence, East Bank Demerara",
-      "description": "Contemporary townhouse in a growing community. Open concept living, modern kitchen, and private patio. Close to shopping centers and restaurants.",
-      "images": [
-        "https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80"
-      ],
-      "bedrooms": "3",
-      "bathrooms": "2"
-    },
-    {
-      "id": 12,
-      "title": "Coastal Retreat",
-      "price": "185000",
-      "location": "Anna Regina, Essequibo Coast",
-      "description": "Relaxing home just minutes from the beach. Perfect for those seeking a quieter pace of life. Large windows with natural light and ocean breezes.",
-      "images": [
-        "https://images.unsplash.com/photo-1432303492674-642e9d0944b2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=872&q=80"
-      ],
+      "title": "Test 6",
+      "price": 90000,
+      "description": "Test 6 Description",
+      "location": "Kingston Street, Georgetown",
       "bedrooms": "2",
-      "bathrooms": "1"
+      "bathrooms": "1",
+      "images": [
+        "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGFwYXJ0bWVudHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=600&q=60"
+      ]
     }
   ],
   "advertisements": [
     {
-      "id": 3,
       "name": "Auto Xpress",
+      "description": "Quality Cars At Affordable Prices",
       "image": "https://i.ibb.co/Pvchk2Vp/514335058-122103068678928572-8401208067346084193-n.jpg",
-      "link": "https://www.facebook.com/autoxpressgy",
-      "description": ""
-    },
-    {
-      "id": 4,
-      "name": "Guyana Bank for Trade and Industry",
-      "image": "https://images.unsplash.com/photo-1553729459-efe14ef6055d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
-      "link": "https://www.gbtibank.com",
-      "description": "Your trusted financial partner for all your banking needs. Home loans, savings accounts, and business banking solutions."
-   }
+      "link": "https://www.facebook.com/autoxpressgy"
+    }
   ]
 }
